@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+
+<!--
+{% block stitle %}
+<h1 class="my-4"> 최근 게시물 </h1>
+<button class="btn btn-primary btn-sm float-right">새 게시물</button>
+{% endblock %}
+-->
+
+{% block content %}
+{% if user.is_authenticated %}
+    <button class="btn btn-primary btn-sm float-right"
+            onclick="location.href='/blog/create'">새 게시물</button>
+{% endif %}
+<h1 class="my-4"> 최근 게시물 </h1>
+
+{% for p in object_list %}
+<!-- Blog Post -->
+<div class="card mb-4">
+    {% if p.head_image %}
+    <img class="card-img-top" src={{p.head_image.url}} alt="Card image cap">
+    {% endif %}
+    <div class="card-body">
+        <h2 class="card-title">{{p.title}}</h2>
+        <p class="card-text">{{p.content | truncatewords:50}}</p>
+        <a href="{{p.get_absolute_url}}" class="btn btn-primary" id="readmore-bt-{{p.pk}}">더 보기 &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">
+        {{p.created}} by {{p.author}}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
