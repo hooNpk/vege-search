@@ -1,7 +1,5 @@
 {% extends 'blog/base.html' %}
-<!--
 {% load crispy_forms_tags %}
--->
 
 {% block content %}
 <!-- Author -- Date/Time-->
@@ -34,8 +32,8 @@
     <div class="card-body">
         <form method="post" action="{{ object.get_absolute_url }}new_comment/">{% csrf_token %}
             <div class="form-group">
-                <!--  {{ comment_form | crispy}}  -->
-                {{ comment_form }}
+                {{ comment_form | crispy}}
+                <!-- {{ comment_form }} -->
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
