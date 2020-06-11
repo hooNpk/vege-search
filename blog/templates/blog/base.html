@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'blog/bootstrap/css/bootstrap.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'blog/bootstrap/css/blog-home.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'blog/_asset/css/custom.min.css' %}">
-
+    <script src="https://kit.fontawesome.com/3e4ec938fe.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -75,10 +75,47 @@
                     </li>
                 </ul>
 
+                <ul class="nav navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{ user }} <span
+                                class="caret"></span></a>
+                        <div class="dropdown-menu" aria-labelledby="download">
+                            <a class="dropdown-item" href="/accounts/logout/"> 로그아웃 </a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                            로그인
+                        </button>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>
 
+    {% load socialaccount %}
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">환영합니다!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a role="button" class="btn btn-primary" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>  구글 계정으로 로그인</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
