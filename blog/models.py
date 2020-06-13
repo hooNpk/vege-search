@@ -1,13 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+"""
+class Restaurant(models.Model):
+    r_name = models.CharField(max_length=30, null=True)
+    location = models.CharField(max_length=30, null=True)
+    phone = models.CharField(max_length=30, null=True)
+"""
 
 class Post(models.Model):
     title = models.CharField(max_length=30)  # 블로그 글 제목
+    restaurant = models.CharField(max_length=30, null=True)
+
+    meat = models.BooleanField(default=True)
+    fish = models.BooleanField(default=True)
+    egg = models.BooleanField(default=True)
+    milk = models.BooleanField(default=True)
     content = models.TextField()  # 블로그 내용
 
     head_image = models.ImageField(upload_to='blog/%Y/%m/%d/', blank=True)
-
     created = models.DateTimeField(auto_now_add=True)  # 작성 일시
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # 어떤 유저가 썼는지.
 
@@ -19,7 +30,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return '/blog/{}/'.format(self.pk)
-
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

@@ -3,7 +3,7 @@
 
 {% block content %}
 <!-- Author -- Date/Time-->
-<h1 class="my-4">{{object.title}}</h1>
+<h1 class="my-4">{{object.title}} : <small class="text-muted">{{object.restaurant}}</small></h1>
 <p class="lead">
     by {{object.author.username}}, Posted on {{object.created}}
     {% if request.user == object.author %}
@@ -22,13 +22,26 @@
 
 <!-- Post Content -->
 <p class="lead">
-    {{object.content}}
+    고기 : {% if object.meat %} 들어있어요 {% else %} 없어요^^ {% endif %}
+</p>
+<p class="lead">
+    생선 : {% if object.fish %} 들어있어요 {% else %} 없어요^^ {% endif %}
+</p>
+<p class="lead">
+    달걀 : {% if object.egg %} 들어있어요 {% else %} 없어요^^ {% endif %}
+</p>
+<p class="lead">
+    우유 : {% if object.milk %} 들어있어요 {% else %} 없어요^^ {% endif %}
+</p>
+<hr>
+<p class="lead">
+    참고 : {{object.content}}
 </p>
 <hr>
 
 <!-- Comments Form -->
 <div class="card my-4">
-    <h5 class="card-header">Leave a Comment:</h5>
+    <h5 class="card-header">평가를 남겨주세요 :</h5>
     <div class="card-body">
         <form method="post" action="{{ object.get_absolute_url }}new_comment/">{% csrf_token %}
             <div class="form-group">
