@@ -13,7 +13,7 @@ class Restaurant(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=30)  # 블로그 글 제목
     #restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    restaurant = models.CharField(max_length=30, default=True)
+    restaurant = models.CharField(max_length=30, null=True)
 
     meat = models.BooleanField(default=True)
     fish = models.BooleanField(default=True)
