@@ -1,16 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-"""
 class Restaurant(models.Model):
-    r_name = models.CharField(max_length=30, null=True)
+    restaurant_name = models.CharField(max_length=30)
     location = models.CharField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)
-"""
+
+    def __str__(self):
+        return '{}::{}'.format(self.restaurant_name, self.location)
 
 class Post(models.Model):
     title = models.CharField(max_length=30)  # 블로그 글 제목
-    restaurant = models.CharField(max_length=30, null=True)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    #restaurant = models.CharField(max_length=30, default=True)
 
     meat = models.BooleanField(default=True)
     fish = models.BooleanField(default=True)
