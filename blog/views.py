@@ -3,12 +3,24 @@ from .models import Post
 from .forms import CommentForm
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 class PostList(ListView):
     model = Post
 
     def get_queryset(self):
         return Post.objects.order_by('-created')
+
+class PostSearch(PostList):
+    def get_queryset(self):
+        q = self.kwargs['q']
+        object_list = Post.objects.filter(Q(title__contains=q) | Q(content__contains=q))
+        return object_list
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(PostSearch, self).get_context_data()
+        context['search_info'] = 'Search: {}'.format(self.kwargs['q'])
+        return context
 
 class PostDetail(DetailView):
     model = Post

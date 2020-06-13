@@ -8,5 +8,6 @@ urlpatterns = [
     path('<int:pk>/update/', views.PostUpdate.as_view()),
     path('<int:pk>/new_comment/', views.new_comment),
     path('create/', views.PostCreate.as_view()),
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('search/<str:q>/', views.PostSearch.as_view())
 ]

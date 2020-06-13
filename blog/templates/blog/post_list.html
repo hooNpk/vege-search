@@ -12,7 +12,10 @@
     <button class="btn btn-primary btn-sm float-right"
             onclick="location.href='/blog/create'">새 게시물</button>
 {% endif %}
-<h1 class="my-4"> 최근 게시물 </h1>
+<h1 class="my-4">
+    최근 게시물
+    {% if search_info %}<small class="text-muted"> {{search_info}}</small>{% endif %}
+</h1>
 
 {% for p in object_list %}
 <!-- Blog Post -->
