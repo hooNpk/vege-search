@@ -70,6 +70,7 @@
             {% endif %}
             <h5 class="mt-0">{{ comment.author }} <small class="text-muted"> {{comment.created_at}} </small></h5>
             {{ comment.text }}
+            <p> 맛 : {{ comment.taste }}   신뢰 : {{ comment.trust }}</p>
         </div>
     </div>
     {% endfor %}
