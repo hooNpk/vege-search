@@ -20,6 +20,13 @@
 {% endif %}
 <hr>
 
+<p class="lead">
+    장소 : {{object.restaurant.location}}
+</p>
+<p class="lead">
+    번호 : {{object.restaurant.phone}}
+</p>
+<hr>
 <!-- Post Content -->
 <p class="lead">
     고기 : {% if object.meat %} 들어있어요 {% else %} 없어요^^ {% endif %}
