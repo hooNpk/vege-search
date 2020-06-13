@@ -3,9 +3,7 @@
 
 {% block content %}
 <!-- Author -- Date/Time-->
-<!--
-<h1 class="my-4">{{object.title}} : <small class="text-muted">{{object.restaurant}}</small></h1>
--->
+
 <p class="lead">
     by {{object.author.username}}, Posted on {{object.created}}
     {% if request.user == object.author %}
